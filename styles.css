@@ -1,0 +1,15 @@
+#boardContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: fit-content;
+    width: fit-content;
+    min-height: 200px;
+    min-width: 200px;
+}
+
+.boardSquare {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
