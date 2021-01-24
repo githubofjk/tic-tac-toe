@@ -1,15 +1,36 @@
 const gameBoard = (() => {
     const boardArray = [];
-    for (i = 0; i < 9; i++) {
-        boardArray[i] = "X";
-    }
     return {boardArray};
 })();
 
+const Player = (name) => {
+    return {name};
+}
+
+const game = (() => {
+    const player1 = Player("player1");
+    const player2 = Player("player2");
+    
+    let turnCounter = 0;
+    return {turnCounter};
+})();
+
 const boardSquares = Array.from(document.querySelectorAll(".boardSquare"));
-boardSquares.forEach(square => square.addEventListener("click", displayGameBoard));
+boardSquares.forEach(square => square.addEventListener("click", displayController));
 
-
-function displayGameBoard(e) {
-    boardSquares[e.target.id].textContent = gameBoard.boardArray[e.target.id];
+function displayController(e) {
+    if (game.turnCounter % 2 === 0) {
+        if (boardSquares[e.target.id].textContent === "") {
+            gameBoard.boardArray[e.target.id] = "X";
+            boardSquares[e.target.id].textContent = gameBoard.boardArray[e.target.id];
+            game.turnCounter++;
+        }  
+    }
+    else {
+        if (boardSquares[e.target.id].textContent === "") {
+            gameBoard.boardArray[e.target.id] = "0";
+            boardSquares[e.target.id].textContent = gameBoard.boardArray[e.target.id];
+            game.turnCounter++;
+        }
+    }
 }
