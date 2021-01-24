@@ -31,7 +31,7 @@ function displayController(e) {
             gameBoard.boardArray[e.target.id] = "X";
             boardSquares[e.target.id].textContent = gameBoard.boardArray[e.target.id];
             // check if won
-            if (gameBoard.boardArray[0] === "X" && gameBoard.boardArray[1] === "X" && gameBoard.boardArray[2] === "X") {
+            if (gameBoard.boardArray[0] === gameBoard.boardArray[1] && gameBoard.boardArray[0] === gameBoard.boardArray[2]) {
                 displayWon.textContent = `${game.player1.name} won!`;
             }
             // if didn't win, then next players turn
