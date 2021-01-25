@@ -59,6 +59,23 @@ const game = (() => {
         {
             return true;
         }
+        else if (gameBoard.boardArray[0] !== undefined &&
+            gameBoard.boardArray[0] === gameBoard.boardArray[4] &&
+            gameBoard.boardArray[0] === gameBoard.boardArray[8] &&
+            gameBoard.boardArray[4] === gameBoard.boardArray[8])
+        {
+            return true;
+        }
+        else if (gameBoard.boardArray[2] !== undefined &&
+            gameBoard.boardArray[2] === gameBoard.boardArray[4] &&
+            gameBoard.boardArray[2] === gameBoard.boardArray[6] &&
+            gameBoard.boardArray[4] === gameBoard.boardArray[6])
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
     };
 
     return {player1, player2, turnCounter, checkWinner};
