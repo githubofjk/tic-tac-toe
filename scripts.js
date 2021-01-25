@@ -85,6 +85,9 @@ function displayController(e) {
     const displayWon = document.querySelector("#won");
     
     // player1 or player2's turn
+    if (!game.checkWinner() && game.turnCounter >= 8) {
+        displayWon.textContent = "Tied!";
+    }
     if (game.turnCounter % 2 === 0) {
         // check if square already has a value
         if (boardSquares[e.target.id].textContent === "") {
