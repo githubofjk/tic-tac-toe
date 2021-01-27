@@ -73,7 +73,7 @@ const game = (() => {
     };
 
     const newGame = () => {
-        game.turnCounter = 0;
+        turnCounter = 0;
 
         gameBoard.boardArray.forEach((square, i) => {
             square = undefined;
@@ -96,6 +96,8 @@ const game = (() => {
 })();
 
 function displayController(e) {
+    console.log(game.turnCounter);
+    
     const displayWon = document.querySelector("#won");
     
     // Stop game if tied
@@ -133,12 +135,7 @@ function displayController(e) {
 }
 
 const boardSquares = Array.from(document.querySelectorAll(".boardSquare"));
-boardSquares.forEach(square => 
-    square.addEventListener("click", (e) => {
-        displayController(e);
-        game.player1Name(e);
-    })
-);
+boardSquares.forEach(square => square.addEventListener("click", displayController));
 
 const btnStart = document.querySelector("#btnStart");
 btnStart.addEventListener("click", game.newGame);
