@@ -1,6 +1,3 @@
-const boardSquares = Array.from(document.querySelectorAll(".boardSquare"));
-boardSquares.forEach(square => square.addEventListener("click", displayController));
-
 const gameBoard = (() => {
     const boardArray = [];
     return {boardArray};
@@ -11,9 +8,6 @@ const Player = (name) => {
 }
 
 const game = (() => {
-    const player1 = Player("player1");
-    const player2 = Player("player2");
-    
     let turnCounter = 0;
 
     const checkWinner = () => {
@@ -78,7 +72,27 @@ const game = (() => {
         }
     };
 
-    return {player1, player2, turnCounter, checkWinner};
+    const newGame = () => {
+        game.turnCounter = 0;
+
+        gameBoard.boardArray.forEach((square, i) => {
+            square = undefined;
+
+            boardSquares[i].textContent = "";
+        });   
+    };
+
+    const player1Name = () => {
+        const player1 = Player(document.querySelector("#player1Name").value);
+        return player1;
+    };
+
+    const player2Name = () => {
+        const player2 = Player(document.querySelector("#player2Name").value);
+        return player2;
+    };
+
+    return {turnCounter, checkWinner, newGame, player1Name, player2Name};
 })();
 
 function displayController(e) {
@@ -96,7 +110,7 @@ function displayController(e) {
             gameBoard.boardArray[e.target.id] = "X";
             boardSquares[e.target.id].textContent = gameBoard.boardArray[e.target.id];
             if (game.checkWinner()) {
-                displayWon.textContent = `${game.player1.name} won!`;
+                displayWon.textContent = `${game.player1Name().name} won!`;
             }
             // if didn't win, then next player turn
             else {
@@ -109,7 +123,7 @@ function displayController(e) {
             gameBoard.boardArray[e.target.id] = "0";
             boardSquares[e.target.id].textContent = gameBoard.boardArray[e.target.id];
             if (game.checkWinner()) {
-                displayWon.textContent = `${game.player2.name} won!`;
+                displayWon.textContent = `${game.player2Name().name} won!`;
             }
             else {
                 game.turnCounter++;
@@ -117,3 +131,14 @@ function displayController(e) {
         }
     }
 }
+
+const boardSquares = Array.from(document.querySelectorAll(".boardSquare"));
+boardSquares.forEach(square => 
+    square.addEventListener("click", (e) => {
+        displayController(e);
+        game.player1Name(e);
+    })
+);
+
+const btnStart = document.querySelector("#btnStart");
+btnStart.addEventListener("click", game.newGame);
